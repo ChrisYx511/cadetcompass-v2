@@ -1,0 +1,1 @@
+https://login.microsoftonline.com/bdfee2d1-e1a2-48f9-bc73-f52ffee2db1d/oauth2/v2.0/authorize?login_hint=&prompt=login&response_type=code&redirect_uri=https%3A%2F%2Fcadetcompass.us.auth0.com%2Flogin%2Fcallback&scope=openid%20email%20profile&state=Npqr9dyDnSXjwSLtuL4It_ocNBoSZCFp&client_id=9cd8597a-03a5-4b40-aadd-aafcd0f00884
