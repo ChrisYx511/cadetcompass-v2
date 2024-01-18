@@ -1,7 +1,9 @@
-function ProfileLoading() {
-    return ( <div className="mt-5 flex">
-       <div className="m-auto"> Loading... </div>
-    </div> );
+function DefaultLoading() {
+  return (
+    <div className="mt-5 flex">
+      <div className="m-auto"> Loading... </div>
+    </div>
+  )
 }
 
-export default ProfileLoading;
+export default DefaultLoading
