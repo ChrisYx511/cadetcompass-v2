@@ -16,6 +16,9 @@ async function getAllTfFromUnit(unit: any) {
 async function ManageCadetsPage() {
   const session = await initializeSession()
   const user = await initializeUser(session)
+  if (!user) {
+    throw new Error("Networking Error!")
+  }
   if (user?.permissionLevel > 1) {
     return (
       <div className="bg-yellow-50 outline outline-yellow-400 rounded-lg p-6 py-8 m-4">

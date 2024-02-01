@@ -84,7 +84,15 @@ export class DBTrainingFile {
   awards: ObjectId[] | []
   additionalUnits: ObjectId[] | []
   createdDate: Date
-  constructor(fname:string, lname: string, cin: number, persEmail: string, rank: string, mainUnit?: ObjectId) {
+  commServiceRecord?: Array<Object>
+  constructor(
+    fname: string,
+    lname: string,
+    cin: number,
+    persEmail: string,
+    rank: string,
+    mainUnit?: ObjectId,
+  ) {
     this.firstName = fname
     this.lastName = lname
     this.cin = cin
@@ -96,7 +104,7 @@ export class DBTrainingFile {
     } else {
       this.associatedUnit = ""
     }
-    
+
     this.rank = rank
     this.awards = []
     this.additionalUnits = []
@@ -129,7 +137,7 @@ export async function createUser({ user }: any) {
     if (!dbProfile.trainingFile) {
       const db = dbClient.db(dbName)
       const tfCollection = db.collection("trainingFiles")
-      const tfQuery = {accountEmail: dbProfile.email}
+      const tfQuery = { accountEmail: dbProfile.email }
       const tf = await tfCollection.findOne(tfQuery)
       if (!tf) {
         return dbProfile
@@ -218,22 +226,21 @@ export async function associateUserAndUnit(
   }
 }
 
-export async function createNewTrainingFile( {
+export async function createNewTrainingFile({
   fname,
   lname,
   email,
   cin,
   rank,
-  mainUnit
-} : {
-  fname: string,
-  lname: string,
-  email: string,
+  mainUnit,
+}: {
+  fname: string
+  lname: string
+  email: string
   cin: number
   rank: string
   mainUnit?: ObjectId
 }) {
-  
   try {
     await dbClient.connect()
     const db = dbClient.db(dbName)
@@ -241,14 +248,7 @@ export async function createNewTrainingFile( {
     const query = { firstName: fname, lastName: lname, cin: cin }
     const trainingFile = await trainingFileCollection.findOne(query)
     if (!trainingFile) {
-      const newTf = new DBTrainingFile(
-        fname,
-        lname,
-        cin,
-        email,
-        rank,
-        mainUnit
-      )
+      const newTf = new DBTrainingFile(fname, lname, cin, email, rank, mainUnit)
       const result = await trainingFileCollection.insertOne(newTf)
       const trainingFile = await trainingFileCollection.findOne(query)
       return trainingFile
@@ -261,19 +261,18 @@ export async function createNewTrainingFile( {
   }
 }
 
-export async function getTrainingFile( {
-  fname,
-  lname,
-  cin,
-  id,
-} : any) {
-  
+export async function getTrainingFile({ fname, lname, cin, id, userId }: any) {
   try {
     await dbClient.connect()
     const db = dbClient.db(dbName)
     const trainingFileCollection = db.collection("trainingFiles")
     if (id) {
-      const query = { _id: id}
+      const query = { _id: id }
+      const trainingFile = await trainingFileCollection.findOne(query)
+      return trainingFile
+    }
+    if (userId) {
+      const query = { associatedUser: id }
       const trainingFile = await trainingFileCollection.findOne(query)
       return trainingFile
     }
@@ -286,4 +285,3 @@ export async function getTrainingFile( {
     await dbClient.close()
   }
 }
-

@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import DefaultLoading from "../loading"
-import Dashboard from "../(components)/Dashboard"
+import Dashboard from "./(components)/Dashboard"
 
 function MainPage() {
   return (
