@@ -1,12 +1,18 @@
-import { DBTrainingFile } from "@/lib/services/db"
+import { DBTrainingFile } from "@/lib/services/db/db"
 
 async function CommunityServiceSummary({
   trainingProfile,
 }: {
-  [trainingProfile: string]: any
+  [trainingProfile: string]: DBTrainingFile
 }) {
   async function getTotalCommServiceHours() {
     let sum: number = 0
+    if (
+      !trainingProfile.commServiceRecord ||
+      trainingProfile.commServiceRecord.length == 0
+    ) {
+      return 0
+    }
     for (let i = 0; i < trainingProfile.commServiceRecord.length; i++) {
       sum += trainingProfile.commServiceRecord[i].numberOfHours
     }

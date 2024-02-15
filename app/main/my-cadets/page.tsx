@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { initializeSession } from "@/lib/services/session"
-import { getAllTfMatching } from "@/lib/services/trainingFiles"
-import { initializeUnit } from "@/lib/services/unit"
-import { initializeUser } from "@/lib/services/user"
+import { getAllTfMatching } from "@/lib/services/db/trainingFiles"
+import { initializeUnit } from "@/lib/services/db/unit"
+import { initializeUser } from "@/lib/services/db/user"
 import { FileWarning, Info } from "lucide-react"
-import { ObjectId } from "mongodb"
-import { Suspense } from "react"
-import DefaultLoading from "../loading"
 
 async function getAllTfFromUnit(unit: any) {
   const arrOfTf = await getAllTfMatching({ associatedUnit: unit._id })
@@ -19,7 +16,8 @@ async function ManageCadetsPage() {
   if (!user) {
     throw new Error("Networking Error!")
   }
-  if (user?.permissionLevel > 1) {
+  console.log(user)
+  if (user.permissionLevel === undefined || user?.permissionLevel > 1) {
     return (
       <div className="bg-yellow-50 outline outline-yellow-400 rounded-lg p-6 py-8 m-4">
         <h2 className="text-xl">

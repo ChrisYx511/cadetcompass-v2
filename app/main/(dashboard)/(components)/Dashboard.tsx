@@ -1,9 +1,7 @@
-import { Suspense } from "react"
-import DefaultLoading from "../../loading"
 import { initializeSession } from "@/lib/services/session"
-import { initializeUser } from "@/lib/services/user"
-import { getTrainingFile } from "@/lib/services/db"
+import { initializeUser } from "@/lib/services/db/user"
 import CommunityServiceSummary from "@/app/main/(dashboard)/(components)/CommunityServiceSummary"
+import { getTrainingFile } from "@/lib/services/db/trainingFiles"
 
 async function Dashboard() {
   const session = await initializeSession()

@@ -1,7 +1,8 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authoptions"
 import { getServerSession } from "next-auth"
 import AccountControls from "./accountControls"
-import { createUser, createUnit, associateUserAndUnit } from "@/lib/services/db"
+import { associateUserAndUnit, createUnit } from "@/lib/services/db/unit"
+import { createUser } from "@/lib/services/db/user"
 
 async function ProfilePage() {
   const session = await getServerSession(authOptions)

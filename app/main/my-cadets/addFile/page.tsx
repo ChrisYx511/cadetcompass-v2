@@ -1,15 +1,15 @@
 import { initializeSession } from "@/lib/services/session"
-import { initializeUnit } from "@/lib/services/unit"
-import { initializeUser } from "@/lib/services/user"
+import { initializeUnit } from "@/lib/services/db/unit"
+import { initializeUser } from "@/lib/services/db/user"
 import NewFileForm from "./(components)/Form"
 import { FileWarning } from "lucide-react"
-import { createNewTrainingFile } from "@/lib/services/db"
 import { ObjectId } from "mongodb"
+import { createNewTrainingFile } from "@/lib/services/db/trainingFiles"
 
 async function AddTrainingFile() {
   const session = await initializeSession()
   const user = await initializeUser(session)
-  if (user?.permissionLevel > 1) {
+  if (!user.permissionLevel || user?.permissionLevel > 1) {
     return (
       <div className="bg-yellow-50 outline outline-yellow-400 rounded-lg p-6 py-8 m-4">
         <h2 className="text-xl">

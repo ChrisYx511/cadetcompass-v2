@@ -1,4 +1,4 @@
-import { ping } from "@/lib/services/db"
+import { ping } from "@/lib/services/db/db"
 import CheeseCounter from "./(components)/Cheese"
 
 async function LandingPage() {

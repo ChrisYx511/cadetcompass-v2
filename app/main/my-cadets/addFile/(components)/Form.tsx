@@ -14,7 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { createNewTrainingFile } from "@/lib/services/db"
+
+import { createNewTrainingFile } from "@/lib/services/db/trainingFiles"
 
 const formSchema = z.object({
   firstName: z.string().min(2).max(50),
