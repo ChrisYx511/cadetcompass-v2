@@ -39,12 +39,15 @@ export async function getInspections(assocTF: ObjectId, entries: number) {
       sort: { createdDate: -1 },
     }
     const cursor = inspections.find(query, options)
+    console.log(cursor)
     let results: any[] = []
     for (let i = 0; i < entries; i++) {
       let res = await cursor.next()
+      console.log(res)
       if (!res) {
         break
       }
+      console.log(res)
       results.push(res)
     }
     return results as DBInspectionEntry[]

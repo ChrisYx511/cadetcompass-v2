@@ -9,7 +9,8 @@ import { createNewTrainingFile } from "@/lib/services/db/trainingFiles"
 async function AddTrainingFile() {
   const session = await initializeSession()
   const user = await initializeUser(session)
-  if (!user.permissionLevel || user?.permissionLevel > 1) {
+  if (user.permissionLevel == null || user?.permissionLevel > 1) {
+    console.log(user.permissionLevel)
     return (
       <div className="bg-yellow-50 outline outline-yellow-400 rounded-lg p-6 py-8 m-4">
         <h2 className="text-xl">
