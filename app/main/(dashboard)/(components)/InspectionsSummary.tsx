@@ -25,13 +25,25 @@ async function InspectionsSummary({
     return inspections
   }
   const obtainedInspections = await getInspectionsAndAvg()
+  if (obtainedInspections.length === 0) {
+    return <div></div>
+  }
   return (
-    <div>
-      {avg}
-      <div>
-        {obtainedInspections.map((entry, i) => (
-          <div key={i}>{entry.comments}</div>
-        ))}
+    <div className="col-span-2 bg-yellow-200 border-yellow-600 border-2 rounded-lg p-3">
+      <h2 className="text-xl font-bold text-center">Latest Inspections</h2>
+      <div className="grid grid-cols-3 my-2">
+        <div className="flex flex-col">
+          <h3 className="text-center font-extrabold text-4xl m-auto">
+            {Math.round(avg * 10) / 10}{" "}
+          </h3>
+          <p className="text-center">Average Score</p>
+        </div>
+        <div className="col-span-2">
+          <h3 className="text-xl font-bold">Latest Comments</h3>
+          {obtainedInspections.map((entry, i) => (
+            <div key={i}>{entry.comments}</div>
+          ))}
+        </div>
       </div>
     </div>
   )

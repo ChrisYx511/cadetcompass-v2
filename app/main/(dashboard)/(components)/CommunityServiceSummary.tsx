@@ -20,7 +20,7 @@ async function CommunityServiceSummary({
   }
   const totalCommServiceHours: number = await getTotalCommServiceHours()
   return (
-    <div className="bg-yellow-500 align-middle text-center rounded-lg mx-4">
+    <div className="bg-yellow-500 align-middle text-center rounded-lg ">
       <div className="text-center m-4">
         <h2 className="text-yellow-800 text-xl font-bold ">
           Community Service
